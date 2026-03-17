@@ -39,7 +39,7 @@ func NewPathSizeCommand() *cli.Command {
 			all := c.Bool("all")
 			recursive := c.Bool("recursive")
 
-			size, err := GetSize(path, all, recursive)
+			size, err := GetSize(path, recursive, all)
 			if err != nil {
 				return err
 			}

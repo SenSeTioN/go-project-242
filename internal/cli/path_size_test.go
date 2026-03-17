@@ -19,7 +19,7 @@ func TestGetPathSize_Directory(t *testing.T) {
 }
 
 func TestGetPathSize_DirectoryRecursive(t *testing.T) {
-	size, err := GetSize("../../testdata", false, true)
+	size, err := GetSize("../../testdata", true, false)
 	require.NoError(t, err)
 	require.Equal(t, int64(62), size)
 }
