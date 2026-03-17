@@ -1,0 +1,46 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# .env файлы для локальной разработки
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.test
+
+# Build artifacts
+bin/
+node_modules
+/shared/api/bundles/
+/coverage/
+*.log
+tmp/
+
+# IDE
+.idea/
+.vscode/
+
+# AI
+.gemini
+.claude
+GEMINI.md
+CLAUDE.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+
+# mocks
+/testdata/
