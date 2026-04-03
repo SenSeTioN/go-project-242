@@ -92,3 +92,13 @@ func TestCommand_HumanLargeFormat(t *testing.T) {
 	require.NoError(t, err)
 	require.Contains(t, output, "../../testdata\n")
 }
+
+func TestCommand_AllFlag(t *testing.T) {
+	outputWithAll, err := runCommand(t, "-r", "-a", "../../testdata")
+	require.NoError(t, err)
+	require.Equal(t, "69B\t../../testdata\n", outputWithAll)
+
+	outputWithoutAll, err := runCommand(t, "-r", "../../testdata")
+	require.NoError(t, err)
+	require.Equal(t, "62B\t../../testdata\n", outputWithoutAll)
+}

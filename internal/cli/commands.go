@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 
+	"code"
+
 	"github.com/urfave/cli/v3"
 )
 
@@ -35,16 +37,12 @@ func NewPathSizeCommand() *cli.Command {
 			}
 
 			path := args.First()
-			human := c.Bool("human")
-			all := c.Bool("all")
-			recursive := c.Bool("recursive")
 
-			size, err := GetSize(path, recursive, all)
+			formatted, err := code.GetPathSize(path, c.Bool("recursive"), c.Bool("human"), c.Bool("all"))
 			if err != nil {
 				return err
 			}
 
-			formatted := FormatSize(size, human)
 			fmt.Printf("%s\t%s\n", formatted, path)
 
 			return nil
