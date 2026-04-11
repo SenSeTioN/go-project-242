@@ -1,33 +1,31 @@
-package code_test
+package code
 
 import (
 	"testing"
-
-	code "code"
 
 	"github.com/stretchr/testify/require"
 )
 
 func TestGetPathSize_File(t *testing.T) {
-	size, err := code.GetSize("testdata/file1.txt", false, false)
+	size, err := getSize("testdata/file1.txt", false, false)
 	require.NoError(t, err)
 	require.Equal(t, int64(14), size)
 }
 
 func TestGetPathSize_Directory(t *testing.T) {
-	size, err := code.GetSize("testdata/only_files", false, false)
+	size, err := getSize("testdata/only_files", false, false)
 	require.NoError(t, err)
 	require.Equal(t, int64(12), size)
 }
 
 func TestGetPathSize_DirectoryRecursive(t *testing.T) {
-	size, err := code.GetSize("testdata", true, false)
+	size, err := getSize("testdata", true, false)
 	require.NoError(t, err)
 	require.Equal(t, int64(62), size)
 }
 
 func TestGetPathSize_NotFound(t *testing.T) {
-	_, err := code.GetSize("testdata/nonexistent.txt", false, false)
+	_, err := getSize("testdata/nonexistent.txt", false, false)
 	require.Error(t, err)
 }
 
@@ -50,26 +48,26 @@ func TestFormatSize(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.expected, func(t *testing.T) {
-			result := code.FormatSize(tt.size, tt.human)
+			result := formatSize(tt.size, tt.human)
 			require.Equal(t, tt.expected, result)
 		})
 	}
 }
 
 func TestGetSize_ExcludesHiddenByDefault(t *testing.T) {
-	size, err := code.GetSize("testdata", true, false)
+	size, err := getSize("testdata", true, false)
 	require.NoError(t, err)
 	require.Equal(t, int64(62), size)
 }
 
 func TestGetSize_IncludesHiddenWhenAll(t *testing.T) {
-	size, err := code.GetSize("testdata", true, true)
+	size, err := getSize("testdata", true, true)
 	require.NoError(t, err)
 	require.Equal(t, int64(69), size) // 62 + 7 (.hidden.txt)
 }
 
 func TestGetSize_NonRecursiveWithHidden(t *testing.T) {
-	size, err := code.GetSize("testdata", false, true)
+	size, err := getSize("testdata", false, true)
 	require.NoError(t, err)
 	require.Equal(t, int64(36), size) // 14 + 15 + 7 (.hidden.txt)
 }

@@ -1,4 +1,4 @@
-package cli
+package main
 
 import (
 	"bytes"
@@ -33,7 +33,7 @@ func captureStdout(t *testing.T, fn func()) string {
 func runCommand(t *testing.T, args ...string) (string, error) {
 	t.Helper()
 
-	cmd := NewPathSizeCommand()
+	cmd := newPathSizeCommand()
 	fullArgs := append([]string{"hexlet-path-size"}, args...)
 
 	var output string

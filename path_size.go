@@ -13,7 +13,7 @@ GetSize возвращает общий размер в байтах файла 
 При recursive=true учитывается содержимое вложенных директорий.
 При all=true в подсчёт включаются скрытые файлы и директории (начинающиеся с точки).
 */
-func GetSize(path string, recursive, all bool) (int64, error) {
+func getSize(path string, recursive, all bool) (int64, error) {
 	info, err := os.Lstat(path)
 	if err != nil {
 		return 0, err
@@ -64,11 +64,11 @@ GetPathSize возвращает отформатированный размер
 в человекочитаемых единицах (KB, MB, GB и т.д.).
 */
 func GetPathSize(path string, recursive, human, all bool) (string, error) {
-	size, err := GetSize(path, recursive, all)
+	size, err := getSize(path, recursive, all)
 	if err != nil {
 		return "", err
 	}
-	return FormatSize(size, human), nil
+	return formatSize(size, human), nil
 }
 
 /*
@@ -76,7 +76,7 @@ FormatSize форматирует размер в байтах в строку. 
 количество байт как есть (например, "1024B"). При human=true подбирает подходящую
 единицу измерения (KB, MB, GB, TB, PB, EB) и форматирует с одним десятичным знаком.
 */
-func FormatSize(size int64, human bool) string {
+func formatSize(size int64, human bool) string {
 	units := []string{"B", "KB", "MB", "GB", "TB", "PB", "EB"}
 	fSize := float64(size)
 	i := 0
